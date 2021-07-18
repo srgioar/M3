@@ -6,6 +6,8 @@ public class Camion extends Vehiculo {
 	Rueda ruedaModelo;
 	
 	/* AMPLIAR: ENTRAR POR PARÁMETRO EL NÚMERO DE EJES */
+	/* El modelo de datos real sería con ruedas izquierda / ruedas derecha si tienes en cuenta el n de ejes 
+	 * Para respetar un poco el ejercicio, lo hemos dejado como Ruedas delanteras / ruedas traseras */
 	
 	public Camion(Titular titular, String matricula, String marca, String color) {
 		

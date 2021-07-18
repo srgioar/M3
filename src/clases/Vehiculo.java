@@ -3,6 +3,8 @@
  */
 package clases;
 
+import java.util.ArrayList;
+
 /**
  * @author Sergio
  *
@@ -18,6 +20,7 @@ public abstract class Vehiculo {
 	final String COLOR_AMARILLO = "AMARILLO";
 	final String COLOR_VERDE = "VERDE";
 	int ejes;
+	ArrayList<Conductor> conductores;
 	//int ruedasDelanteras, ruedasTraseras;
 
 	
@@ -31,6 +34,15 @@ public abstract class Vehiculo {
 		this.marca = marca;
 		this.color = color;
 
+	}
+	
+	public Vehiculo (Titular titular, ArrayList<Conductor> conductores, String matricula, String marca, String color){
+		this.titular = titular;
+		//Probando
+		this.conductores = new ArrayList<Conductor>();
+		this.matricula = matricula;
+		this.marca = marca;
+		this.color = color;
 	}
 
 }

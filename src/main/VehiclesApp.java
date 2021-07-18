@@ -18,6 +18,12 @@ public class VehiclesApp {
 	static ArrayList<Titular> listaTitulares = new ArrayList<Titular>();
 	static ArrayList<Conductor> listaConductores = new ArrayList<Conductor>();
 	
+	/* IMPORTANTE:
+	 * Este ArrayList de conductores es una base de datos de todos los conductores de la aplicación.
+	 * Los arraylists de conductores internos de cada vehículo tienen los conductores correspondientes al vehículo.
+	 * TODO: Indicar el vehículo asignado en cada conductor en su vista en mostrarDatos?
+	 */
+	
 	public static void mostrarDatos() {
 		
 		String strTitulares = "TITULARES \n";
@@ -155,6 +161,8 @@ public class VehiclesApp {
 	}
 	
 	public static void menuPrincipal() {
+		
+		/* TODO: Al habilitar Titulares como Conductor, crear un objeto Conductor con los campos comunes del Titular */
 		
 		String opcion = JOptionPane.showInputDialog(null, "1. INTRODUCE TITULAR \n 2. INTRODUCE CONDUCTOR \n 3. INTRODUCE VEHICULO \n 4. MOSTRAR DATOS \n 0. SALIR");
 		
