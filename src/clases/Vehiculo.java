@@ -25,7 +25,7 @@ public abstract class Vehiculo {
 		
 	}
 	
-	public Vehiculo(Titular titular, String matricula, String marca, String color){
+	public Vehiculo (Titular titular, String matricula, String marca, String color){
 		this.titular = titular;
 		this.matricula = matricula;
 		this.marca = marca;

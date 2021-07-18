@@ -19,9 +19,21 @@ public class VehiclesApp {
 	static ArrayList<Conductor> listaConductores = new ArrayList<Conductor>();
 	
 	public static void mostrarDatos() {
-		JOptionPane.showMessageDialog(null, "TITULARES \n" + listaTitulares.toString());
+		
+		String strTitulares = "TITULARES \n";
+		
+		for (int i = 0; i < listaTitulares.size(); i++) {
+			Titular ti;
+			ti = listaTitulares.get(i);
+			strTitulares += "ID: " + (i+1) + " | ";
+			strTitulares += ti.getNombre();
+		}
+		
+		JOptionPane.showMessageDialog(null, strTitulares);
+		
 		JOptionPane.showMessageDialog(null, "VEHICULOS \n" + listaVehiculos.toString());
 	}
+	
 	
 	public static Object crearVehiculo() {
 		
@@ -32,8 +44,8 @@ public class VehiclesApp {
 		 * 
 		 */
 		
-		JOptionPane.showMessageDialog(null, "¿QUÉ TIPO DE VEHÍCULO QUIERES CREAR? \n   1-> COCHE  2-> MOTO  3-> CAMIÓN");
-		String input = JOptionPane.showInputDialog("ELIGE 1-2-3");
+		//JOptionPane.showMessageDialog(null, "¿QUÉ TIPO DE VEHÍCULO QUIERES CREAR? \n   1-> COCHE  2-> MOTO  3-> CAMIÓN");
+		String input = JOptionPane.showInputDialog("¿QUÉ TIPO DE VEHÍCULO QUIERES REGISTRAR? \n  1-> COCHE  2-> MOTO  3-> CAMIÓN");
 		
 		/* Como no podemos instanciar vehículo al ser abstracta, en vez de cambiar vehículo a clase no abstracta
 		 * lo que hacemos es crear un objeto genérico, y luego asignarlo al tipo de objeto final
@@ -49,21 +61,63 @@ public class VehiclesApp {
 		 * 
 		 */
 		
+		// Extender a comprobar si el titular existe y si el titular tiene licencia, con excepciones o breaks
+		
+		int indexTitular = Integer.parseInt(
+				JOptionPane.showInputDialog("TITULARES: \n " + listaTitulares.toString() + "\n INSERTA ID DE TITULAR: ")
+				);
+		
+		// Depende del tipo de vehículo hace falta una licencia u otra
+		Licencia li = listaTitulares.get(indexTitular).getLicencia();
+		String tipoLicencia = li.getTipo();
+		
+		
+		// Si el titular no existe o no tiene licencia, soltar excepción
+		
 		switch (input) {
+		
 		case "1":
-			Coche testCoche = new Coche(null, "MATRICULA", "marcacoche", "azul");
-			vehiculo = testCoche;
-			JOptionPane.showMessageDialog(null, testCoche.toString());   
-			break;
+	
+			Coche testCoche = new Coche(listaTitulares.get(indexTitular), "MATRICULA", "marcacoche", "azul");
+			
+			if (tipoLicencia != "B1") {
+				// Excepción
+			}
+			
+			else {
+				vehiculo = testCoche;
+				JOptionPane.showMessageDialog(null, testCoche.toString());   
+				break;
+			}
+			
 		case "2":
+			
 			Moto testMoto = new Moto(null, "MATRICULA", "marcamoto", "azul");
-			vehiculo = testMoto;
-			JOptionPane.showMessageDialog(null, testMoto.toString());  
-			break;
+			
+			if (tipoLicencia != "A1") {
+				// Excepción
+			}
+			
+			else {
+				vehiculo = testMoto;
+				JOptionPane.showMessageDialog(null, testMoto.toString());  
+				break;
+			}
+			
+			
 		case "3":
 			Camion testCamion = new Camion(null, "MATRICULA", "marcacoche", "azul");
-			vehiculo = testCamion;
-			break;
+			
+			if (tipoLicencia != "C1") {
+				// Excepción
+			}
+			
+			else {
+				vehiculo = testCamion;
+				//JOptionPane.showMessageDialog(null, testMoto.toString()); 
+				break;
+			}
+
 		}
 		
 		// Añadir a lista
@@ -81,7 +135,7 @@ public class VehiclesApp {
 			String nombreTitular = JOptionPane.showInputDialog("NOMBRE TITULAR: ");
 			String apellidoTitular = JOptionPane.showInputDialog("APELLIDO TITULAR: ");
 			
-			int strFechaNacimiento = Integer.parseInt(JOptionPane.showInputDialog("INSERTA FECHA CADUCIDAD (AÑO): "));
+			int strFechaNacimiento = Integer.parseInt(JOptionPane.showInputDialog("INSERTA FECHA NACIMIENTO (AÑO): "));
 			Licencia licencia = Licencia.introducirLicencia();
 			String tieneSeguro = JOptionPane.showInputDialog("¿Tiene seguro? S/N: ");
 			if (tieneSeguro == "S") seguro = true;
@@ -99,24 +153,16 @@ public class VehiclesApp {
 			return titular;
 			
 	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	
+	public static void menuPrincipal() {
 		
-//		String input = JOptionPane.showInputDialog("Elige opción: \n 1 -> Mostrar stock \n 2-> Insertar artículo \n 3-> Consultar artículo \n 4->Reponer artículo \n 5-> Realizar venta");
-//		JOptionPane.showMessageDialog(null, input);
-		
-		// CREAR TITULAR O VEHICULO
-		// ASIGNARLE TITULAR AL VEHICULO, SI NO ES POSIBLE, AVISAR CON EXCEPCION Y SALIR
-		// AVISAR SI EL TITULAR SERÁ CONDUCTOR, SI NO, ASIGNARLE CONDUCTORES (INTRODUCIR CONDUCTOR)
-		// COMPROBAR SI EL CONDUCTOR TIENE LICENCIA, DE LO CONTRARIO VOLVER A INTRODUCIR CONDUCTOR O CANCELAR
-		
-		String opcion = JOptionPane.showInputDialog(null, "1. INTRODUCE TITULAR \n 2. INTRODUCE CONDUCTOR \n 3. INTRODUCE VEHICULO \n 4. MOSTRAR DATOS \n 5. SALIR");
+		String opcion = JOptionPane.showInputDialog(null, "1. INTRODUCE TITULAR \n 2. INTRODUCE CONDUCTOR \n 3. INTRODUCE VEHICULO \n 4. MOSTRAR DATOS \n 0. SALIR");
 		
 		switch (opcion) {
 		case "1":
 			// Introducir titular
 			crearTitular();
+			menuPrincipal();
 			break;
 		case "2":
 			// Introducir conductor
@@ -124,13 +170,31 @@ public class VehiclesApp {
 		case "3":
 			// Introducir vehiculo
 			crearVehiculo();
+			menuPrincipal();
 			break;
 		case "4":
 			// Mostrar datos
 			mostrarDatos();
+			menuPrincipal();
 			break;
+		case "0":
+			// Salir del programa
 		}
 
+	} // FIN MENU 
+	
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		// CREAR TITULAR O VEHICULO
+		// ASIGNARLE TITULAR AL VEHICULO, SI NO ES POSIBLE, AVISAR CON EXCEPCION Y SALIR
+		// AVISAR SI EL TITULAR SERÁ CONDUCTOR, SI NO, ASIGNARLE CONDUCTORES (INTRODUCIR CONDUCTOR)
+		// COMPROBAR SI EL CONDUCTOR TIENE LICENCIA, DE LO CONTRARIO VOLVER A INTRODUCIR CONDUCTOR O CANCELAR
+	
+		menuPrincipal();
+		
+		
 	}
 	
 	

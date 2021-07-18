@@ -26,7 +26,7 @@ public class Rueda {
 		
 		input = JOptionPane.showInputDialog("Elige MARCA DE LA RUEDA (PIRELLI o DUNLOP)");
 		
-		if (input != MARCA_PIRELLI || input != MARCA_DUNLOP) {
+		if (input != MARCA_PIRELLI && input != MARCA_DUNLOP) {
 			
 			input = JOptionPane.showInputDialog("Elige MARCA DE LA RUEDA (PIRELLI o DUNLOP)");
 			

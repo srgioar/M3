@@ -11,5 +11,9 @@ public class Titular extends Persona {
 		this.tieneGaraje = tieneGaraje;
 	}
 	
+	public String getNombre() {
+		return nombre;
+	}
+	
 	
 }

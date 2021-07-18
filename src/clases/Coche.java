@@ -31,19 +31,25 @@ public class Coche extends Vehiculo {
 		String nombreTitular = "";
 		
 		if (titular == null) {
+			
 			nombreTitular = "Sin titular \n";
 		}
 		
 		else {
+			
 			nombreTitular = titular.getNombre() + "\n";
 		}
 		
-		return "Coche Info:\n" + "TITULAR: " + nombreTitular +
-				"MATRÍCULA: " + matricula + "\n MARCA: " + marca + "\n COLOR: " + color +
-				"\n CANTIDAD RUEDAS DELANTERAS: 2" +
-				"\n CANTIDAD RUEDAS TRASERAS: 2" +
-				"\n RUEDAS INSTALADAS: " + this.ruedasDelanteras[0].toString() +
-				"\n CANTIDAD DE EJES: 2 (Coche)";
+		return "INFO VEHÍCULO: \n" +
+				"TIPO: " + "COCHE \n" + 
+				"TITULAR: " + nombreTitular +
+				"MATRÍCULA: " + matricula +
+				"\n MARCA: " + marca +
+				"\n COLOR: " + color +
+				"\n CANTIDAD DE EJES: " + this.ejes +
+				"\n CANT. RUEDAS DELANTERAS: " + this.ruedasDelanteras.length +
+				"\n CANT. RUEDAS TRASERAS: " + this.ruedasTraseras.length +
+				"\n RUEDAS TOTALES INSTALADAS: " + (this.ruedasDelanteras.length * ejes) + " " + ruedaModelo.toString();
 	}
 	
 }
