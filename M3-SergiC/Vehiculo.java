@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 public abstract class Vehiculo {
 
@@ -10,13 +13,27 @@ public abstract class Vehiculo {
 	protected Rueda[] ruedas_delanteras;
 	protected Rueda[] ruedas_traseras;
 	
-	public Vehiculo (Titular titular,String matricula,String marca,String color) {
+	protected ArrayList Conductores;
+	
+	//Este es el constructor que usamos para el Milestone 3 (constructor final)
+	public Vehiculo (Titular titular,ArrayList<Conductor> conductores,String matricula,String marca,String color) {
 		this.matricula = matricula;	
+		this.Conductores = new ArrayList <Conductor>();
 		this.marca=marca;
 		this.color=color;
+	}
+	
+	public void asignarConductor (Conductor conductor){
+		
+		this.Conductores.add(conductor);
+		JOptionPane.showMessageDialog(null, "Conductor asignado a: "+this);
 		
 	}
 	
+	public static void asignarConductor (Conductor conductor, Vehiculo vehiculo) {
 	
+		vehiculo.Conductores.add(conductor);
+		JOptionPane.showMessageDialog(null, "Conductor asignado a: "+vehiculo);
 	
+	}	
 }
