@@ -30,12 +30,16 @@ public class Coche extends Vehiculo {
 			nombreTitular = titular.nombre + "\n";
 		}
 		
-		return "Coche Info:\n" + "TITULAR: " + nombreTitular +
-				"MATRÍCULA: " + matricula + "\n MARCA: " + marca + "\n COLOR: " + color +
-				"\n CANTIDAD RUEDAS DELANTERAS: 2" +
-				"\n CANTIDAD RUEDAS TRASERAS: 2" +
-				"\n RUEDAS INSTALADAS: " + this.ruedas_delanteras[0].toString() +
-				"\n CANTIDAD DE EJES: 2 (Coche)";
+		return "INFO VEHÍCULO: \n" +
+			"TIPO: " + "COCHE \n" + 
+			"TITULAR: " + nombreTitular +
+			"MATRÍCULA: " + matricula +
+			"\n MARCA: " + marca +
+			"\n COLOR: " + color +
+			"\n CANTIDAD DE EJES: " + this.ejes +
+			"\n CANT. RUEDAS DELANTERAS: " + this.ruedas_delanteras.length +
+			"\n CANT. RUEDAS TRASERAS: " + this.ruedas_traseras.length +
+			"\n RUEDAS TOTALES INSTALADAS: " + (this.ruedas_delanteras.length * ejes) + " " + rueda_modelo.toString();
 	}
 	
 }
