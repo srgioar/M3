@@ -9,7 +9,7 @@ public class Moto extends Vehiculo {
 		
 		super(titular, matricula, marca, color);
 		
-		this.ruedaModelo = Rueda.instanciarRueda();
+		this.ruedaModelo = Rueda.generarRueda();
 		
 		this.ejes = 2;
 		this.ruedasDelanteras = new Rueda[1];

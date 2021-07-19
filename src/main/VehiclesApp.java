@@ -41,16 +41,53 @@ public class VehiclesApp {
 	}
 	
 	
+	
+	// POLIMORFISMO: SI TIENE TITULAR COMO PARÁMETRO ASIGNA TITULAR A CONDUCTOR, DE LO CONTRARIO INTRODUCE DATOS
+	
+	public static Conductor crearConductor(Titular titular) {
+		
+		Conductor nuevoConductor = new Conductor(titular.getNombre(), titular.getApellido(), titular.getFechaNacimiento(), titular.getLicencia());
+		
+		listaConductores.add(nuevoConductor);
+		return nuevoConductor;
+		
+	}
+	
+	// FORZAR ASIGNAR CONDUCTOR AL COCHE CREADO
+	
+	public static Conductor crearConductor() {
+		
+		//String nombre, String apellido, String fechaNacimiento, Licencia licencia, boolean tieneSeguro, boolean tieneGaraje
+	
+		String nombreTitular = JOptionPane.showInputDialog("NOMBRE CONDUCTOR: ");
+		String apellidoTitular = JOptionPane.showInputDialog("APELLIDO CONDUCTOR: ");
+		
+		int strFechaNacimiento = Integer.parseInt(JOptionPane.showInputDialog("INSERTA FECHA NACIMIENTO (AÑO): "));
+		
+		// Introducción datos licencia del conductor
+		Licencia licencia = Licencia.introducirLicencia();
+
+		
+		Conductor conductor = new Conductor(nombreTitular, apellidoTitular, strFechaNacimiento, licencia);
+		
+		// Añadir a la lista GLOBAL de conductores
+		listaConductores.add(conductor);
+		
+		// CHEQUEAR LICENCIA Y SOLTAR EXCEPCIÓN COMO EN TITULAR!
+		
+		//Licencia licencia = new Licencia(idLicencia, tipoLicencia, strNombreCompleto, strFechaCaducidad);
+		
+		return conductor;
+		
+	}
+	
+	// crearConductor(conductor);
+	// asignarConductor(conductor);
+	
+	
 	public static Object crearVehiculo() {
 		
-		/*
-		 * Hay que modificar para que se pida un titular y dependiendo del numero introducido
-		 * introduzca el titular del índice correspondiente en listaTitulares
-		 * 
-		 * 
-		 */
-		
-		//JOptionPane.showMessageDialog(null, "¿QUÉ TIPO DE VEHÍCULO QUIERES CREAR? \n   1-> COCHE  2-> MOTO  3-> CAMIÓN");
+		String tipoLicencia = "";
 		String input = JOptionPane.showInputDialog("¿QUÉ TIPO DE VEHÍCULO QUIERES REGISTRAR? \n  1-> COCHE  2-> MOTO  3-> CAMIÓN");
 		
 		/* Como no podemos instanciar vehículo al ser abstracta, en vez de cambiar vehículo a clase no abstracta
@@ -59,39 +96,42 @@ public class VehiclesApp {
 		
 		Object vehiculo = new Object();
 		
-		/* 
-		 * CONTROLAR POR EXCEPCIÓN QUE EL TITULAR ASIGNADO TENGA LICENCIA ADECUADA
-		 * AÑADIR LISTA DE CONDUCTORES A VEHÍCULOS
-		 * SI EL TITULAR NO ES EL CONDUCTOR, AÑADIR USUARIO NUEVO (TIPO CONDUCTOR)
-		 * TIENE ANIDADO CADA COCHE UNA LISTA DE CONDUCTORES
-		 * 
-		 */
-		
-		// Extender a comprobar si el titular existe y si el titular tiene licencia, con excepciones o breaks
-		
 		int indexTitular = Integer.parseInt(
 				JOptionPane.showInputDialog("TITULARES: \n " + listaTitulares.toString() + "\n INSERTA ID DE TITULAR: ")
 				);
 		
-		// Depende del tipo de vehículo hace falta una licencia u otra
-		Licencia li = listaTitulares.get(indexTitular).getLicencia();
-		String tipoLicencia = li.getTipo();
+		try {
+			// Depende del tipo de vehículo (SEGÚN ID DE TITULAR!) hace falta una licencia u otra
+			Licencia li = listaTitulares.get(indexTitular-1).getLicencia();
+			tipoLicencia = li.getTipo();
+		}
 		
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Excepción creando titular: \n" + e);
+		}
+
 		
-		// Si el titular no existe o no tiene licencia, soltar excepción
+		// if licencia no es válida o no existe titular -> excepción
 		
+
 		switch (input) {
 		
 		case "1":
 	
-			Coche testCoche = new Coche(listaTitulares.get(indexTitular), "MATRICULA", "marcacoche", "azul");
+			Coche testCoche = new Coche(listaTitulares.get(indexTitular-1), null, "MATRICULA", "marcacoche", "azul");
 			
-			if (tipoLicencia != "B1") {
+			if (!tipoLicencia.equalsIgnoreCase("B1")) {
 				// Excepción
+				JOptionPane.showMessageDialog(null, "Licencia no correcta para este vehículo");
+				menuPrincipal();
+				break;
 			}
 			
 			else {
 				vehiculo = testCoche;
+				checkConductor(listaTitulares.get(indexTitular-1));
+				Conductor c = checkConductor(listaTitulares.get(indexTitular-1));
+				testCoche.asignarConductor(c);
 				JOptionPane.showMessageDialog(null, testCoche.toString());   
 				break;
 			}
@@ -132,6 +172,23 @@ public class VehiclesApp {
 		
 	}
 	
+	// Preguntar si el titular será el conductor, de lo contrario introducir conductor y asignar
+	public static Conductor checkConductor(Titular t) {
+		Conductor c;
+		
+		String tieneGaraje = JOptionPane.showInputDialog("¿El titular será conductor? S/N: ");
+		
+		if (tieneGaraje.equalsIgnoreCase("s")) {
+			c = crearConductor(t);
+			return c;
+		}
+		
+		else {
+			c = crearConductor();
+			return c;
+		}
+	}
+	
 	public static Titular crearTitular() {
 		
 		//String nombre, String apellido, String fechaNacimiento, Licencia licencia, boolean tieneSeguro, boolean tieneGaraje
@@ -143,11 +200,12 @@ public class VehiclesApp {
 			
 			int strFechaNacimiento = Integer.parseInt(JOptionPane.showInputDialog("INSERTA FECHA NACIMIENTO (AÑO): "));
 			Licencia licencia = Licencia.introducirLicencia();
+			// Introducir un toLowerCase y comprobar contra n
 			String tieneSeguro = JOptionPane.showInputDialog("¿Tiene seguro? S/N: ");
-			if (tieneSeguro == "S") seguro = true;
+			if (tieneSeguro.equalsIgnoreCase("s")) seguro = true;
 			
 			String tieneGaraje = JOptionPane.showInputDialog("¿Tiene garaje? S/N: ");
-			if (tieneGaraje == "S") garaje = true;
+			if (tieneGaraje.equalsIgnoreCase("s")) garaje = true;
 			
 			Titular titular = new Titular(nombreTitular, apellidoTitular, strFechaNacimiento, licencia, seguro, garaje);
 			
@@ -164,7 +222,7 @@ public class VehiclesApp {
 		
 		/* TODO: Al habilitar Titulares como Conductor, crear un objeto Conductor con los campos comunes del Titular */
 		
-		String opcion = JOptionPane.showInputDialog(null, "1. INTRODUCE TITULAR \n 2. INTRODUCE CONDUCTOR \n 3. INTRODUCE VEHICULO \n 4. MOSTRAR DATOS \n 0. SALIR");
+		String opcion = JOptionPane.showInputDialog(null, "1. INTRODUCE TITULAR \n 2. INTRODUCE CONDUCTOR \n 3. INTRODUCE VEHICULO \n 4. ASIGNAR CONDUCTOR 5. MOSTRAR DATOS \n 0. SALIR");
 		
 		switch (opcion) {
 		case "1":
@@ -174,6 +232,8 @@ public class VehiclesApp {
 			break;
 		case "2":
 			// Introducir conductor
+			crearConductor();
+			menuPrincipal();
 			break;
 		case "3":
 			// Introducir vehiculo
@@ -181,10 +241,14 @@ public class VehiclesApp {
 			menuPrincipal();
 			break;
 		case "4":
+			//asignarConductor();
+			// Funciona con la clase estática de Vehiculo asignarConductor();
+		case "5":
 			// Mostrar datos
 			mostrarDatos();
 			menuPrincipal();
 			break;
+			
 		case "0":
 			// Salir del programa
 		}

@@ -18,6 +18,28 @@ public class Rueda {
 		this.diametro = diametro;
 	}
 	
+	public static Rueda generarRueda () {
+		
+        String marca = "";
+        Double diametro=0.0;
+
+        do{
+            marca = JOptionPane.showInputDialog("Introduce la marca de la rueda");
+        }while(!marca.equalsIgnoreCase(MARCA_DUNLOP)&&!marca.equalsIgnoreCase(MARCA_PIRELLI));
+
+        do {
+            String diametro_usuario = JOptionPane.showInputDialog("Introduce el diametro de la rueda");
+            diametro=Double.parseDouble(diametro_usuario);
+        }while(diametro<0.4||diametro>4);
+
+        Rueda rueda = new Rueda (marca,diametro);
+        
+        JOptionPane.showMessageDialog(null, rueda.toString());
+
+        return rueda;
+        
+    }
+	
 	public static Rueda instanciarRueda() {
 		
 		Rueda ruedaFinal;

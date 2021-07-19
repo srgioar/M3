@@ -1,5 +1,7 @@
 package clases;
 
+import java.util.ArrayList;
+
 public class Coche extends Vehiculo {
 	
 	Rueda[] ruedasDelanteras, ruedasTraseras;
@@ -9,7 +11,7 @@ public class Coche extends Vehiculo {
 		
 		super(titular, matricula, marca, color);
 		
-		this.ruedaModelo = Rueda.instanciarRueda();
+		this.ruedaModelo = Rueda.generarRueda();
 		
 		this.ejes = 2;
 		this.ruedasDelanteras = new Rueda[2];
@@ -23,6 +25,27 @@ public class Coche extends Vehiculo {
 		this.color = color;
 		this.matricula = matricula;
 		this.marca = marca;
+	}
+	
+	public Coche(Titular titular, ArrayList<Conductor> conductores, String matricula, String marca, String color) {
+		
+		super(titular, conductores, matricula, marca, color);
+		
+		this.ruedaModelo = Rueda.generarRueda();
+		
+		this.ejes = 2;
+		this.ruedasDelanteras = new Rueda[2];
+		this.ruedasDelanteras[0] = this.ruedaModelo;
+		this.ruedasDelanteras[1] = this.ruedaModelo;
+		
+		this.ruedasTraseras = new Rueda[2];
+		this.ruedasTraseras[0] = this.ruedaModelo;
+		this.ruedasTraseras[0] = this.ruedaModelo;
+		
+		this.color = color;
+		this.matricula = matricula;
+		this.marca = marca;
+		
 	}
 	
 	@Override
