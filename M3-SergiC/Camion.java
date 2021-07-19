@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 
 public class Camion extends Vehiculo {
 
 	protected Rueda rueda_modelo;
 	
-	public Camion (Titular titular,String matricula,String marca,String color) {
-		super(titular,matricula, marca, color);
+	public Camion (Titular titular,ArrayList<Conductor> conductores,String matricula,String marca,String color) {
+		super(titular,conductores,matricula, marca, color);
 
 		this.ejes = 2;
 		
