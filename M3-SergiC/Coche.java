@@ -1,11 +1,13 @@
+import java.util.ArrayList;
 
 public class Coche extends Vehiculo {
 
 	protected Rueda rueda_modelo;
 	
-	public Coche(Titular titular,String matricula, String marca, String color) {
-
-        super(titular,matricula, marca, color);
+	//Este es el constructor que usamos para el Milestone 3 (constructor final)
+	public Coche(Titular titular, ArrayList<Conductor> conductores, String matricula, String marca, String color) {
+		
+		super(titular,conductores,matricula, marca, color);
 
         this.rueda_modelo = Rueda.generarRueda();
         
@@ -16,7 +18,8 @@ public class Coche extends Vehiculo {
         this.ruedas_traseras[1] = this.rueda_modelo;
         this.ruedas_delanteras[0] = this.rueda_modelo;
         this.ruedas_delanteras[1] = this.rueda_modelo;
-    }
+		
+	}
 	
 	public String toString() {
 		
