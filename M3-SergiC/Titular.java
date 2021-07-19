@@ -10,4 +10,6 @@ public class Titular extends Persona {
 		this.garaje = garaje;
 	}
 	
+	
+	
 }
