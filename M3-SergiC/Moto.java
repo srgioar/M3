@@ -1,10 +1,11 @@
+import java.util.ArrayList;
 
 public class Moto extends Vehiculo {
 
 	protected Rueda rueda_modelo;
 	
-	public Moto (Titular titular,String matricula,String marca,String color) {
-		super(titular,matricula, marca, color);
+	public Moto (Titular titular,ArrayList<Conductor> conductores,String matricula,String marca,String color) {
+		super(titular,conductores,matricula, marca, color);
 
         this.rueda_modelo = Rueda.generarRueda();
         
