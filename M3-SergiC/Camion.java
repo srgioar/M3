@@ -21,7 +21,7 @@ public class Camion extends Vehiculo {
         
 	}
 	
-public String toString() {
+	public String toString() {
 		
 		String nombreTitular = "";
 		
