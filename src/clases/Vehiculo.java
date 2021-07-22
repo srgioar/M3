@@ -22,7 +22,7 @@ public abstract class Vehiculo {
 	final String COLOR_AMARILLO = "AMARILLO";
 	final String COLOR_VERDE = "VERDE";
 	int ejes;
-	ArrayList<Conductor> conductores = new ArrayList<Conductor>();
+	ArrayList<Conductor> conductores;
 	//int ruedasDelanteras, ruedasTraseras;
 
 	
@@ -56,8 +56,33 @@ public abstract class Vehiculo {
 	// Asigna un conductor a un vehículo, esta vez con coche como parámetro
 	// Es estática porque funciona con ambos parámetros y podemos invocarla fuera
 	public static void asignarConductor(Conductor conductor, Vehiculo vehiculo) {
-		vehiculo.conductores.add(conductor);
-		JOptionPane.showMessageDialog(null, "Conductor asignado a: \n" + vehiculo.marca + " " + vehiculo.matricula + " " + conductor);
+		
+		try {
+			vehiculo.conductores.add(conductor);
+			JOptionPane.showMessageDialog(null, "Conductor asignado a: \n" + vehiculo.marca + " " + vehiculo.matricula + " " + conductor);
+
+		}
+		
+		catch (Exception e){
+			JOptionPane.showMessageDialog(null, e);
+		}
+		
+	}
+	
+	public boolean checkearMatricula() {
+		/* En vez de chequear caracteres usamos una RegEx
+		 * Antes de implementarla la comprobaremos en una calculadora de RegEx */
+		
+		if (this.matricula.toUpperCase().matches("^[0-9]{4}[A-Z]{3}$")) {
+	        System.out.println("Matrícula válida");
+	        return true;
+	    }
+		
+		else {
+	        System.out.println("Matrícula inválida");
+	        return false;
+	    }
+		
 	}
 
 }

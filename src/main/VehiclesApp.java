@@ -32,22 +32,25 @@ public class VehiclesApp {
 			Titular ti;
 			ti = listaTitulares.get(i);
 			strTitulares += "ID: " + (i+1) + " | ";
-			strTitulares += ti.getNombre();
+			strTitulares += ti.getNombre() + " | ";
+			strTitulares += ti.getApellido() + " | ";
+			strTitulares += "Licencia: " + ti.getLicencia();
 		}
 		
 		JOptionPane.showMessageDialog(null, strTitulares);
 		
 		JOptionPane.showMessageDialog(null, "VEHICULOS \n" + listaVehiculos.toString());
+		
+		JOptionPane.showMessageDialog(null, "CONDUCTORES \n" + listaConductores.toString());
 	}
 	
 	
 	
-	// POLIMORFISMO: SI TIENE TITULAR COMO PARÁMETRO ASIGNA TITULAR A CONDUCTOR, DE LO CONTRARIO INTRODUCE DATOS
+	// POLIMORFISMO: SI TIENE TITULAR COMO PARÁMETRO ASIGNA TITULAR A CONDUCTOR, DE LO CONTRARIO SU FUNCIÓN GEMELA INTRODUCE DATOS
 	
 	public static Conductor crearConductor(Titular titular) {
 		
 		Conductor nuevoConductor = new Conductor(titular.getNombre(), titular.getApellido(), titular.getFechaNacimiento(), titular.getLicencia());
-		
 		listaConductores.add(nuevoConductor);
 		return nuevoConductor;
 		
@@ -172,7 +175,7 @@ public class VehiclesApp {
 		
 	}
 	
-	// Preguntar si el titular será el conductor, de lo contrario introducir conductor y asignar
+	// Preguntar si el titular será el conductor, de lo contrario te fuerza a introducir conductor y asignarlo
 	public static Conductor checkConductor(Titular t) {
 		Conductor c;
 		
@@ -218,11 +221,30 @@ public class VehiclesApp {
 			
 	}
 	
+	// Pide entrada de conductor y de vehiculo para poder vincular uno a otro
+	// Es necesario porque desde el menú principal no tenemos ningún vehículo por defecto al que asignar
+	// Con esta entrada, alimentamos el método estático asignarConductor(vehiculo, conductor)
+	public static void asignarConductorManual() {
+		
+		int IDvehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "1. ELIGE UN VEHÍCULO (ID): "));
+		int IDconductor = Integer.parseInt(JOptionPane.showInputDialog(null, "2. ELIGE UN CONDUCTOR QUE ASIGNARLE (ID): "));
+
+		try {
+			Vehiculo.asignarConductor(listaConductores.get(IDconductor), listaVehiculos.get(IDvehiculo));
+		}
+		
+		catch (Exception e){
+			System.out.println(e);
+		}
+		
+		
+	}
+	
 	public static void menuPrincipal() {
 		
 		/* TODO: Al habilitar Titulares como Conductor, crear un objeto Conductor con los campos comunes del Titular */
 		
-		String opcion = JOptionPane.showInputDialog(null, "1. INTRODUCE TITULAR \n 2. INTRODUCE CONDUCTOR \n 3. INTRODUCE VEHICULO \n 4. ASIGNAR CONDUCTOR 5. MOSTRAR DATOS \n 0. SALIR");
+		String opcion = JOptionPane.showInputDialog(null, "1. INTRODUCE TITULAR \n 2. INTRODUCE CONDUCTOR \n 3. INTRODUCE VEHICULO \n 4. ASIGNAR CONDUCTOR \n 5. MOSTRAR DATOS \n 0. SALIR");
 		
 		switch (opcion) {
 		case "1":
@@ -241,8 +263,8 @@ public class VehiclesApp {
 			menuPrincipal();
 			break;
 		case "4":
-			//asignarConductor();
-			// Funciona con la clase estática de Vehiculo asignarConductor();
+			asignarConductorManual();
+			menuPrincipal();
 		case "5":
 			// Mostrar datos
 			mostrarDatos();
