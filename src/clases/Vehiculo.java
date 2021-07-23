@@ -23,20 +23,21 @@ public abstract class Vehiculo {
 	final String COLOR_VERDE = "VERDE";
 	int ejes;
 	ArrayList<Conductor> conductores;
-	//int ruedasDelanteras, ruedasTraseras;
 
+	// Comento estos constructores en vez de borrarlos para quedarme más tranquilo si algo se rompe
+	// NO se usan, pertenecen a pasos anteriores
 	
-	public Vehiculo() {
-		
-	}
-	
-	public Vehiculo (Titular titular, String matricula, String marca, String color){
-		this.titular = titular;
-		this.matricula = matricula;
-		this.marca = marca;
-		this.color = color;
-
-	}
+//	public Vehiculo() {
+//		
+//	}
+//	
+//	public Vehiculo (Titular titular, String matricula, String marca, String color){
+//		this.titular = titular;
+//		this.matricula = matricula;
+//		this.marca = marca;
+//		this.color = color;
+//
+//	}
 	
 	public Vehiculo (Titular titular, ArrayList<Conductor> conductores, String matricula, String marca, String color){
 		this.titular = titular;

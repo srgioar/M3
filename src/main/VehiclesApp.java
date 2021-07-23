@@ -141,7 +141,7 @@ public class VehiclesApp {
 			
 		case "2":
 			
-			Moto testMoto = new Moto(null, "MATRICULA", "marcamoto", "azul");
+			Moto testMoto = new Moto(listaTitulares.get(indexTitular-1), null, "MATRICULA", "marcamoto", "azul");
 			
 			if (tipoLicencia != "A1") {
 				// Excepción
@@ -155,7 +155,7 @@ public class VehiclesApp {
 			
 			
 		case "3":
-			Camion testCamion = new Camion(null, "MATRICULA", "marcacoche", "azul");
+			Camion testCamion = new Camion(listaTitulares.get(indexTitular-1), null, "MATRICULA", "marcacoche", "azul");
 			
 			if (tipoLicencia != "C1") {
 				// Excepción

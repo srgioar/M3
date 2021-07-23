@@ -1,13 +1,15 @@
 package clases;
 
+import java.util.ArrayList;
+
 public class Moto extends Vehiculo {
 	
 	Rueda[] ruedasDelanteras, ruedasTraseras;
 	Rueda ruedaModelo;
 	
-	public Moto(Titular titular, String matricula, String marca, String color) {
+	public Moto(Titular titular, ArrayList<Conductor> conductores, String matricula, String marca, String color) {
 		
-		super(titular, matricula, marca, color);
+		super(titular, conductores, matricula, marca, color);
 		
 		this.ruedaModelo = Rueda.generarRueda();
 		

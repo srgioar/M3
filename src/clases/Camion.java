@@ -1,5 +1,7 @@
 package clases;
 
+import java.util.ArrayList;
+
 public class Camion extends Vehiculo {
 	
 	Rueda[] ruedasDelanteras, ruedasTraseras;
@@ -9,9 +11,9 @@ public class Camion extends Vehiculo {
 	/* El modelo de datos real sería con ruedas izquierda / ruedas derecha si tienes en cuenta el n de ejes 
 	 * Para respetar un poco el ejercicio, lo hemos dejado como Ruedas delanteras / ruedas traseras */
 	
-	public Camion(Titular titular, String matricula, String marca, String color) {
+	public Camion(Titular titular, ArrayList<Conductor> conductores, String matricula, String marca, String color) {
 		
-		super(titular, matricula, marca, color);
+		super(titular, conductores, matricula, marca, color);
 		
 		this.ruedaModelo = Rueda.generarRueda();
 		
