@@ -16,12 +16,15 @@ public class M3App {
 			Titular ti;
 			ti = array_titulares.get(i);
 			strTitulares += "ID: " + (i+1) + " | ";
-			strTitulares += ti.getNombre();
+			strTitulares += ti.getNombre() + " | ";
+			strTitulares += ti.getApellido() + " | ";
+			strTitulares += "Licencia: " + ti.getLicencia();
 		}
 		
 		JOptionPane.showMessageDialog(null, strTitulares);
 		
 		JOptionPane.showMessageDialog(null, "VEHICULOS \n" + array_vehiculos.toString());
+		JOptionPane.showMessageDialog(null, "CONDUCTORES \n" + array_conductores.toString());
 	}
 	
 	//Funcion por si el usuario dice que el titular sera conductor
@@ -187,6 +190,22 @@ public class M3App {
 		
 	}
 	
+	public static void asignarConductorManual() {
+		
+		int IDvehiculo = Integer.parseInt(JOptionPane.showInputDialog(null, "1. ELIGE UN VEHÍCULO (ID): "));
+		int IDconductor = Integer.parseInt(JOptionPane.showInputDialog(null, "2. ELIGE UN CONDUCTOR QUE ASIGNARLE (ID): "));
+
+		try {
+			Vehiculo.asignarConductor(array_conductores.get(IDconductor), array_vehiculos.get(IDvehiculo));
+		}
+		
+		catch (Exception e){
+			System.out.println(e);
+		}
+		
+		
+	}
+	
 	public static void menuPrincipal () {
 		
 		String menu = JOptionPane.showInputDialog("Que quieres hacer \n 1-Crear Titular \n 2-Crear Conductor \n 3-Crear Vehiculos \n 4-Añadir Conductor \n 5-Mostrar Datos \n 0-Salir");
@@ -205,8 +224,8 @@ public class M3App {
 				menuPrincipal();
 			break;
 			case "4":
-				//Metodo de la clase abstracta Vehiculo
-				//menuPrincipal();
+				asignarConductorManual();
+				menuPrincipal();
 			break;
 			case "5":
 				mostrarDatos();
