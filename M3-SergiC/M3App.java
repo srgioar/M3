@@ -75,7 +75,7 @@ public class M3App {
 		//Switch que dependiendo de lo introducido por el usuario creara un vehiculo u otro
 		switch (input) {
 		case "1":
-			Coche testCoche = new Coche(null, "MATRICULA", "marcacoche", "azul");
+			Coche testCoche = new Coche(array_titulares.get(id_titular-1),null, "MATRICULA", "marcacoche", "azul");
 			
 			if(!tipo_licencia.equalsIgnoreCase("B1")) {
 				JOptionPane.showMessageDialog(null, "Licencia no correcta para este vehículo");
@@ -92,7 +92,7 @@ public class M3App {
 			}
 
 		case "2":
-			Moto testMoto = new Moto(null, "MATRICULA", "marcamoto", "azul");
+			Moto testMoto = new Moto(array_titulares.get(id_titular-1),null, "MATRICULA", "marcamoto", "azul");
 			
 			if(!tipo_licencia.equalsIgnoreCase("A1")) {
 				JOptionPane.showMessageDialog(null, "Licencia no correcta para este vehículo");
@@ -104,7 +104,7 @@ public class M3App {
 				break;
 			}
 		case "3":
-			Camion testCamion = new Camion(null, "MATRICULA", "marcacoche", "azul");
+			Camion testCamion = new Camion(array_titulares.get(id_titular-1),null, "MATRICULA", "marcacoche", "azul");
 			
 			if(!tipo_licencia.equalsIgnoreCase("C1")) {
 				JOptionPane.showMessageDialog(null, "Licencia no correcta para este vehículo");
